@@ -1,0 +1,32 @@
+public class Testing {
+	public static void main(String[] args) {
+		int[] a = { 1, 2, 3 };
+		List<int[]> permutation = new ArrayList<int[]>();
+		generatePermutation(a, 0, permutation);
+		for (int[] z : permutation) {
+			for (int x : z) {
+				System.out.print(x);
+			}
+			System.out.println();
+		}
+		
+	}
+
+	private static void generatePermutation(int[] a, int start, List<int[]> permutation) {
+		if (start == a.length - 1) {
+			permutation.add(Arrays.copyOf(a, a.length));
+			return;
+		}
+		for (int i = start; i < a.length; i++) {
+			swap(a, start, i);
+			generatePermutation(a, start + 1, permutation);
+			swap(a, start, i);
+		}
+	}
+
+	private static void swap(int[] a, int start, int i) {
+		int t = a[start];
+		a[start] = a[i];
+		a[i] = t;
+	}
+}
